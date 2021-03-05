@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   logo: {
-    fill: "#fff",
+    fill: "#000",
     height: 35,
     [theme.breakpoints.up("md")]: {
       height: 50,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   logoutButton: {
     color: theme.palette.primary.main,
     backgroundColor: "white",
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bolder",
     marginLeft: "auto",
     marginRight: 0,
@@ -91,7 +91,7 @@ export default function Topbar(props) {
           className={classes.logoutButton}
           onClick={props.logout}
         >
-          Log Out
+          Logout
         </Button>
       );
 

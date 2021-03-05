@@ -17,11 +17,11 @@ html {
 }
 
 a {
-  color: rgb(34, 30, 247);
+  color: rgb(219, 23, 33);
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(247, 141, 30);
+  color: rgb(0, 0, 0);
   text-decoration: underline;
 }

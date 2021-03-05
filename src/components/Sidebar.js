@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   link: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
     textDecoration: "underline",
   },
 }));
@@ -90,7 +90,7 @@ export default connect(mapStateToProps)(function Sidebar(props) {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={() => props.setDrawerOpen(false)}>
-            <Close color="secondary" />
+            <Close color="primary" />
           </IconButton>
         </div>
         <Divider />
@@ -98,7 +98,7 @@ export default connect(mapStateToProps)(function Sidebar(props) {
           <Link className={classes.link} to="/app/exercise">
                 <ListItem button key="Exercise">
                   <ListItemIcon>
-                    <Apps color="secondary" />
+                    <Apps color="primary" />
                   </ListItemIcon>
                   <ListItemText primary="Exercise" />
                 </ListItem>

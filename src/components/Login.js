@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     link: {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
       textDecoration: "underline",
     },
     field: {
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
                   fontSize: 50,
                 }}
               >
-                Log in to TypeKing
+                TypeKing
               </Typography>
             </Grid>
             <Grid item>
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Mail color="secondary" />
+                      <Mail color="primary" />
                     </InputAdornment>
                   ),
                 }}
@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Lock color="secondary" />
+                      <Lock color="primary" />
                     </InputAdornment>
                   ),
                   endAdornment: (
@@ -193,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
             </Grid>
             <Grid item>
               <Typography style={{ padding: 30, fontSize: 20 }}>
-                Don't have a TypeKing account?{" "}
+                Would you like to make an account?{" "}
                 <Link className={classes.link} to="/register">
                   Click here
                 </Link>

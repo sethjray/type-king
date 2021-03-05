@@ -14,12 +14,9 @@ import { bindActionCreators } from 'redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import './App.css'
-import { setUser, setLoading } from './actions/index'
+import { setUser, setLoading, setExercise } from './actions/index'
 import Login from './components/Login'
 import Home from './components/Home'
-//import RegisterForm from './components/RegisterForm'
-//import RegisterConfirmation from './components/RegisterConfirmation'
-//import PasswordConfirmation from './components/PasswordRecovery/PasswordConfirmation'
 
 const jwtDecode = require('jwt-decode')
 
@@ -27,8 +24,7 @@ const jwtDecode = require('jwt-decode')
 const light = createMuiTheme({
     palette: {
       primary: {
-        // accent: orange
-        main: '#f78d1e',
+        main: '#ff0004',
         contrastText: '#fff'
       },
       drawer: {
@@ -45,8 +41,7 @@ const light = createMuiTheme({
   const dark = createMuiTheme({
     palette: {
       primary: {
-        // accent: orange
-        main: '#f78d1e',
+        main: '#ff0004',
         contrastText: '#fff'
       },
       drawer: {
@@ -102,6 +97,9 @@ class App extends Component {
               name: temp.name,
               email: temp.email
             })
+            this.props.setExercise({
+              exerciseString: "This is the first exercise, the end."
+            })
           })
           .catch()
       }
@@ -127,7 +125,7 @@ class App extends Component {
       }
     }
   
-    createUser = async (name, email, password, securityQuestion, securityPassword) => {
+    createUser = async (name, email, password) => {
       try {
         this.setState.loading = true
         const { data } = await axios.post(
@@ -185,6 +183,8 @@ class App extends Component {
     }
   }
   
+  //******************************************************************************
+  // Redux Incoming Variables Function
   function mapStateToProps(state) {
     return {
       user: state.user,
@@ -193,9 +193,11 @@ class App extends Component {
     }
   }
   
+  //******************************************************************************
+  // Redux Outgoing Variables Function
   function matchDispatchToProps(dispatch) {
     return bindActionCreators(
-      { setUser: setUser, setLoading: setLoading },
+      { setUser: setUser, setLoading: setLoading, setExercise: setExercise },
       dispatch
     )
   }

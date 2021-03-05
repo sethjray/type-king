@@ -24,7 +24,7 @@ const styleClasses = () => ({
     height: "100px",
     borderStyle: "solid",
     borderWidth: "2px 2px 2px 2px",
-    backgroundColor: "red",
+    backgroundColor: "blue",
   },
   drawer: {
     openWidth: 240,

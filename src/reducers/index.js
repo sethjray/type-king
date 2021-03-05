@@ -9,11 +9,16 @@ import { combineReducers } from 'redux';
 import LoadingReducer from './LoadingReducer';
 import UserReducer from './UserReducer';
 import WindowReducer from './WindowReducer';
+import ThemeReducer from './ThemeReducer';
+import ExStringReducer from './ExStringReducer';
 
 const allReducers = combineReducers({
     loading: LoadingReducer,
     user: UserReducer,
-    window: WindowReducer
+    window: WindowReducer,
+    colorTheme: ThemeReducer,
+    exerciseString: ExStringReducer
+
 })
 
 export default allReducers

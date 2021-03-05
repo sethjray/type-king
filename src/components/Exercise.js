@@ -7,13 +7,14 @@ import { setLoading } from '../actions/index'
 
 import logo from '../logo.svg';
 import './App.css';
-import { generate, testExercise } from '../utils/words';
+import { generate, exerciseOne } from '../utils/words';
 import useKeyPress from '../hooks/useKeyPress';
 import { currentTime } from '../utils/time';
 
 //const startingWords = generate();
 
-const startingWords = testExercise();
+const startingWords = exerciseOne();
+var exerciseDone = false;
 
 export default connect(
 	mapStateToProps,
@@ -30,8 +31,7 @@ export default connect(
       const [wpm, setWpm] = useState(0);
       const [accuracy, setAccuracy] = useState(0);
       const[typedChars, setTypedChars] = useState('');
-
-      var exerciseDone = false;
+      
     
       useKeyPress(key => {
         let updatedOutgoingChars = outgoingChars;
@@ -42,6 +42,14 @@ export default connect(
         }
 
         //Put exercise end logic here?
+        console.log(exerciseDone);
+        if(exerciseDone === true) {
+          setIncomingChars("Finished!");
+          setOutgoingChars("Finished!");
+          //Save WPM and accuracy here for stats?
+          return;
+        }
+        console.log(incomingChars);
     
         const updatedTypedChars = typedChars + key;
         setTypedChars(updatedTypedChars);
@@ -67,8 +75,9 @@ export default connect(
         //   if(updatedIncomingChars.split(' ').length < 10) {
         //     updatedIncomingChars += ' ' + generate();
         //   }
-          if(updatedIncomingChars.split(' ').length == 0)
+          if(currentChar == '.') {
             exerciseDone = true;
+          }
         
           setIncomingChars(updatedIncomingChars);
         }
@@ -79,15 +88,9 @@ export default connect(
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <p className="Character">
-              <span className="Character-out">
-                {(leftPadding + outgoingChars).slice(-20)}
-              </span>
+              <span className="Character-out">{(leftPadding + outgoingChars).slice(-20)}</span>
               <span className="Character-current">{currentChar}</span>
-              {exerciseDone != true ? (
-                  <span>{incomingChars.substr(0, 20)}</span>
-              ) : (
-                  <span>Finished!</span>
-              )}
+              <span>{incomingChars.substr(0, 20)}</span>
             </p>
             <h3>
               WPM: {wpm} | ACC: {accuracy}%
@@ -101,7 +104,8 @@ export default connect(
 // Redux Incoming Variables Function
 function mapStateToProps(state) {
 	return {
-	}
+    exerciseString: state.exerciseString,
+	};
 }
 //******************************************************************************
 // Redux Outgoing Variables Function

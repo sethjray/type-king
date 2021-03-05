@@ -54,3 +54,15 @@ export const setLoading = isLoading => {
       payload: height
     }
   }
+
+  //******************************************************************************
+// Set Exercise String Redux Function
+// 
+// File(s) Used:
+export const setExercise = exerciseString => {
+  console.log('set exercise string to: ', exerciseString)
+  return {
+    type: 'EXSTRING_CHANGED',
+    payload: exerciseString
+  }
+}
