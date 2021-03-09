@@ -14,6 +14,7 @@ import { setWindowWidth, setWindowHeight, setLoading } from "../actions/index";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import Exercise from "./Exercise";
+import ExerciseSelection from "./ExerciseSelection";
 
 const styleClasses = () => ({
   root: {
@@ -91,6 +92,9 @@ class Home extends Component {
                         <Route path="/app/exercise">
                             <Exercise />
                         </Route>
+						<Route path="/app/exerciseselection">
+							<ExerciseSelection />
+						</Route>
 					</div>
 				</div>
 			</div>

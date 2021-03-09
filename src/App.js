@@ -18,6 +18,8 @@ import { setUser, setLoading, setExercise } from './actions/index'
 import Login from './components/Login'
 import Home from './components/Home'
 
+import { exercises } from './utils/words';
+
 const jwtDecode = require('jwt-decode')
 
 // color theme definition: light
@@ -82,6 +84,7 @@ class App extends Component {
     }
   
     componentDidMount() {
+      this.props.setExercise(exercises[1].words)
       let token = localStorage.getItem('token')
       if (token) {
         axios
@@ -96,9 +99,6 @@ class App extends Component {
               id: temp.id,
               name: temp.name,
               email: temp.email
-            })
-            this.props.setExercise({
-              exerciseString: "This is the first exercise, the end."
             })
           })
           .catch()

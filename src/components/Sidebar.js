@@ -103,6 +103,14 @@ export default connect(mapStateToProps)(function Sidebar(props) {
                   <ListItemText primary="Exercise" />
                 </ListItem>
           </Link>
+          <Link className={classes.link} to="/app/exerciseselection">
+                <ListItem button key="ExerciseSelection">
+                  <ListItemIcon>
+                    <Apps color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="ExerciseSelection" />
+                </ListItem>
+          </Link>
         </List>
         <Divider />
         <Divider />
