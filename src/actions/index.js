@@ -96,7 +96,7 @@ export const fetchStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTy
 
 export const updateStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTyped, statistics) => {
   //Global Stats
-  statistics.globalStats.averageAcc = (statistics.globalStats.averageAcc + accuracy) / 2.0;
+  statistics.globalStats.averageAcc = accuracy;
   if(wordsPerMinute > statistics.globalStats.fastestWPM) {
     statistics.globalStats.fastestWPM = wordsPerMinute;
   }
