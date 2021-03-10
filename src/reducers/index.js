@@ -12,6 +12,7 @@ import WindowReducer from './WindowReducer';
 import ThemeReducer from './ThemeReducer';
 import ExStringReducer from './ExStringReducer';
 import ExIdReducer from './ExIdReducer';
+import StatsReducer from './StatsReducer';
 
 const allReducers = combineReducers({
     loading: LoadingReducer,
@@ -20,6 +21,7 @@ const allReducers = combineReducers({
     colorTheme: ThemeReducer,
     exerciseString: ExStringReducer,
     exerciseId: ExIdReducer,
+    statistics: StatsReducer,
 })
 
 export default allReducers

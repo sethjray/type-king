@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setLoading } from '../actions/index'
+import { fetchStats, setLoading } from '../actions/index'
 
 import logo from '../logo.svg';
 import './App.css';
@@ -41,32 +41,47 @@ export default connect(
   }, []);
 
 
-  const updateStats = async (exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
-    props.setLoading(true);
+  const getOldStats = async () => {
     try {
-      //Fetch old stats
-      var { statistics } = await axios.get(
-        `http://localhost:8080/api/users/${props.user.id}`
-      );
-
-      //Update stats here
-      statistics.globalStats.AverageAcc = (statistics.globalStats.AverageAcc + accuracy) / 2;
-
-      //Put new stats back in DB
-      const { response } = await axios.put(
-        `http://localhost:8080/api/users/${props.user.id}`,
-        {
-          statistics
-        }
+      const response = await axios.get(
+        `http://localhost:8080/api/users/${props.user._id}`
       );
       console.log(response.data);
-      props.setLoading(false);
+      return response.data;
     } catch (err) {
-      console.log(err.message)
-      props.setLoading(false);
-      return false
+      return null;
     }
   }
+
+
+  // const updateStatsVer1 = async (exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
+  //   props.setLoading(true);
+  //   try {
+  //     //Fetch old stats
+  //     const statistics = await axios.get(
+  //       `http://localhost:8080/api/users/${props.user._id}`
+  //     )
+  //     .then(response => {
+  //       console.log(response.data);
+  //     })
+
+  //     //Update stats here
+  //     statistics.data.globalStats.averageAcc = (statistics.data.globalStats.averageAcc + accuracy) / 2;
+
+  //     //Put new stats back in DB
+  //     const { response2 } = await axios.put(
+  //       `http://localhost:8080/api/users/${props.user._id}`,
+  //       {
+  //         statistics
+  //       }
+  //     );
+  //     props.setLoading(false);
+  //   } catch (err) {
+  //     console.log(err.message)
+  //     props.setLoading(false);
+  //     return false
+  //   }
+  // }
 
 
   useKeyPress(key => {
@@ -82,7 +97,7 @@ export default connect(
       setIncomingChars("Finished!");
       setOutgoingChars("Finished!");
       //Save WPM and accuracy here for stats?
-      updateStats(props.exerciseId, wpm, accuracy, props.exerciseString.length);
+      props.fetchStats(props.user._id, props.exerciseId, wpm, accuracy, props.exerciseString.length);
       console.log("Finished!")
       return;
     }
@@ -142,7 +157,8 @@ function mapStateToProps(state) {
 	return {
     exerciseString: state.exerciseString,
     exerciseId: state.exerciseId,
-    user: state.user
+    user: state.user,
+    statistics: state.statistics,
 	};
 }
 //******************************************************************************
@@ -151,6 +167,7 @@ function matchDispatchToProps(dispatch) {
 	return bindActionCreators(
 		{
 			setLoading: setLoading,
+      fetchStats: fetchStats,
 		},
 		dispatch
 	)

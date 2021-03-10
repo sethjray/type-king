@@ -4,6 +4,7 @@
 // Holds all the Redux functions that are used to set global Redux variables
 //
 //
+import axios from 'axios'
 
 //******************************************************************************
 // Set User Redux Function
@@ -79,3 +80,54 @@ export const setExerciseId = exerciseId => {
     payload: exerciseId
   }
 }
+
+export const fetchStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
+  return(dispatch) => {
+    return axios.get(`http://localhost:8080/api/users/${userId}`)
+    .then(response => {
+      console.log("in fetchStats: ", response.data)
+      dispatch(updateStats(userId, exerciseId, wordsPerMinute, accuracy, wordsTyped, response.data))
+    })
+    .catch(error => {
+      throw(error);
+    });
+  };
+};
+
+export const updateStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTyped, statistics) => {
+  //Global Stats
+  statistics.globalStats.averageAcc = (statistics.globalStats.averageAcc + accuracy) / 2.0;
+  if(wordsPerMinute > statistics.globalStats.fastestWPM) {
+    statistics.globalStats.fastestWPM = wordsPerMinute;
+  }
+  statistics.globalStats.wordsTyped += wordsTyped;
+
+  //Exercise Stats
+  if(accuracy > statistics.exerciseStats["exercise" + exerciseId].bestAcc) {
+    statistics.exerciseStats["exercise" + exerciseId].bestAcc = accuracy;
+  }
+  if(wordsPerMinute > statistics.exerciseStats["exercise" + exerciseId].fastestWPM) {
+    statistics.exerciseStats["exercise" + exerciseId].fastestWPM = wordsPerMinute;
+  }
+  console.log('Should be new statistics object:', statistics)
+  return(dispatch) => {
+    return axios.put(`http://localhost:8080/api/users/${userId}`,{
+      statistics
+    })
+    .then(response => {
+      console.log("in updateStats: ", response.data)
+      dispatch(updateStatsSuccess(response.data))
+    })
+    .catch(error => {
+      throw(error);
+    }); 
+  };
+};
+
+export const updateStatsSuccess = (stats) => {
+  console.log('Should be updated stats: ', stats)
+  return {
+    type: 'STATS_CHANGED',
+    payload: stats
+  }
+};

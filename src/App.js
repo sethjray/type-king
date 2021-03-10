@@ -17,6 +17,8 @@ import './App.css'
 import { setUser, setLoading, setExerciseString, setExerciseId } from './actions/index'
 import Login from './components/Login'
 import Home from './components/Home'
+import RegisterConfirmation from './components/RegisterConfirmation'
+import RegisterForm from './components/RegisterForm'
 
 import { exercises } from './utils/words';
 
@@ -86,7 +88,8 @@ class App extends Component {
     componentDidMount() {
       this.props.setExerciseString(exercises[1].words)
       this.props.setExerciseId(exercises[1].id)
-      let token = localStorage.getItem('token')
+      //let token = localStorage.getItem('token')
+      let token = 'fakeToken'
       if (token) {
         axios
           .put('http://localhost:8080/api/users/token', {
@@ -94,9 +97,11 @@ class App extends Component {
           })
           .then(res => {
             localStorage.setItem('token', res.data)
-            this.setState({ auth: true, userData: jwtDecode(res.data) })
-            var temp = jwtDecode(res.data)
-            console.log("About to call setUser")
+            //this.setState({ auth: true, userData: jwtDecode(res.data) })
+            this.setState({ auth: true, userData: res.data })
+            //var temp = jwtDecode(res.data)
+            var temp = res.data
+            console.log("decoded data: ", temp)
             this.props.setUser({
               id: temp.id,
               name: temp.name,
@@ -119,8 +124,8 @@ class App extends Component {
         )
         localStorage.setItem('token', data)
         this.setState({ loading: false, auth: true })
-        console.log("About to call setUser")
-        this.props.setUser(jwtDecode(data))
+        //this.props.setUser(jwtDecode(data))
+        this.props.setUser(data)
         return true
       } catch (err) {
         this.setState.loading = false
@@ -128,7 +133,7 @@ class App extends Component {
       }
     }
   
-    createUser = async (name, email, password) => {
+    createUser = async (name, email, password, skillQuestion) => {
       try {
         this.setState.loading = true
         const { data } = await axios.post(
@@ -136,7 +141,8 @@ class App extends Component {
           {
             name,
             email,
-            password
+            password,
+            skillQuestion
           }
         )
         localStorage.setItem('token', data)
@@ -173,12 +179,12 @@ class App extends Component {
                   tryLogin={this.tryLogin}
                 />
               </Route>
-              {/* <Route exact path='/register'>
+              <Route exact path='/register'>
                 <RegisterForm createUser={this.createUser} />
               </Route>
               <Route exact path='/register/confirm'>
                 <RegisterConfirmation></RegisterConfirmation>
-              </Route> */}
+              </Route>
             </Router>
           </div>
         </MuiThemeProvider>
@@ -190,7 +196,6 @@ class App extends Component {
   // Redux Incoming Variables Function
   function mapStateToProps(state) {
     return {
-      user: state.user,
       loading: state.loading,
       colorTheme: state.colorTheme
     }
