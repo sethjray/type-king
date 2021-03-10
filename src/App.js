@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import './App.css'
-import { setUser, setLoading, setExerciseString, setExerciseId } from './actions/index'
+import { setUser, setLoading, setExerciseString, setExerciseId, fetchStats } from './actions/index'
 import Login from './components/Login'
 import Home from './components/Home'
 import RegisterConfirmation from './components/RegisterConfirmation'
@@ -107,6 +107,7 @@ class App extends Component {
               name: temp.name,
               email: temp.email
             })
+            this.props.fetchStats(this.props.user._id)
           })
           .catch()
       }
@@ -126,6 +127,7 @@ class App extends Component {
         this.setState({ loading: false, auth: true })
         //this.props.setUser(jwtDecode(data))
         this.props.setUser(data)
+        this.props.fetchStats(this.props.user._id)
         return true
       } catch (err) {
         this.setState.loading = false
@@ -197,7 +199,8 @@ class App extends Component {
   function mapStateToProps(state) {
     return {
       loading: state.loading,
-      colorTheme: state.colorTheme
+      colorTheme: state.colorTheme,
+      user: state.user,
     }
   }
   
@@ -208,7 +211,8 @@ class App extends Component {
       { setUser: setUser, 
         setLoading: setLoading, 
         setExerciseString: setExerciseString,
-        setExerciseId: setExerciseId },
+        setExerciseId: setExerciseId,
+        fetchStats: fetchStats },
       dispatch
     )
   }

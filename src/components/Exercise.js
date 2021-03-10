@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchStats, setLoading } from '../actions/index'
+import { prepareStats, setLoading } from '../actions/index'
 
 import logo from '../logo.svg';
 import './App.css';
@@ -97,41 +97,46 @@ export default connect(
       setIncomingChars("Finished!");
       setOutgoingChars("Finished!");
       //Save WPM and accuracy here for stats?
-      props.fetchStats(props.user._id, props.exerciseId, wpm, accuracy, props.exerciseString.length);
+      props.prepareStats(props.user._id, props.exerciseId, wpm, accuracy, props.exerciseString.length);
       console.log("Finished!")
-      return;
-    }
+      //return;
+    } else {
 
-    const updatedTypedChars = typedChars + key;
-    setTypedChars(updatedTypedChars);
-    setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2,),);
+      const updatedTypedChars = typedChars + key;
+      setTypedChars(updatedTypedChars);
+      setAccuracy(((updatedOutgoingChars.length * 100) / updatedTypedChars.length).toFixed(2,),);
 
-    if(key === currentChar) {
-      if (incomingChars.charAt(0) === ' ') {
-        setWordCount(wordCount + 1);
-        const durationInMinutes = (currentTime() - startTime) / 60000.0;
-        setWpm(((wordCount + 1) / durationInMinutes).toFixed(2));
+      if(key === currentChar) {
+        if (incomingChars.charAt(0) === ' ') {
+          setWordCount(wordCount + 1);
+          const durationInMinutes = (currentTime() - startTime) / 60000.0;
+          setWpm(((wordCount + 1) / durationInMinutes).toFixed(2));
+        }
+
+        if(leftPadding.length > 0) {
+          setLeftPadding(leftPadding.substring(1));
+        }
+
+        updatedOutgoingChars += currentChar;
+        setOutgoingChars(updatedOutgoingChars);
+
+        setCurrentChar(incomingChars.charAt(0));
+
+        updatedIncomingChars = incomingChars.substring(1);
+      //   if(updatedIncomingChars.split(' ').length < 10) {
+      //     updatedIncomingChars += ' ' + generate();
+      //   }
+        if(currentChar == '.') {
+          exerciseDone = true;
+        }
+      
+        setIncomingChars(updatedIncomingChars);
       }
 
-      if(leftPadding.length > 0) {
-        setLeftPadding(leftPadding.substring(1));
+
       }
 
-      updatedOutgoingChars += currentChar;
-      setOutgoingChars(updatedOutgoingChars);
-
-      setCurrentChar(incomingChars.charAt(0));
-
-      updatedIncomingChars = incomingChars.substring(1);
-    //   if(updatedIncomingChars.split(' ').length < 10) {
-    //     updatedIncomingChars += ' ' + generate();
-    //   }
-      if(currentChar == '.') {
-        exerciseDone = true;
-      }
     
-      setIncomingChars(updatedIncomingChars);
-    }
   });
 
   return (
@@ -167,7 +172,7 @@ function matchDispatchToProps(dispatch) {
 	return bindActionCreators(
 		{
 			setLoading: setLoading,
-      fetchStats: fetchStats,
+      prepareStats: prepareStats,
 		},
 		dispatch
 	)

@@ -81,11 +81,11 @@ export const setExerciseId = exerciseId => {
   }
 }
 
-export const fetchStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
+export const prepareStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
   return(dispatch) => {
     return axios.get(`http://localhost:8080/api/users/${userId}`)
     .then(response => {
-      console.log("in fetchStats: ", response.data)
+      console.log("in prepareStats: ", response.data)
       dispatch(updateStats(userId, exerciseId, wordsPerMinute, accuracy, wordsTyped, response.data))
     })
     .catch(error => {
@@ -109,6 +109,18 @@ export const updateStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsT
   if(wordsPerMinute > statistics.exerciseStats["exercise" + exerciseId].fastestWPM) {
     statistics.exerciseStats["exercise" + exerciseId].fastestWPM = wordsPerMinute;
   }
+
+  //Achievements
+  if(statistics.globalStats.wordsTyped > 1000) {
+    statistics.achievements.alltheWords = true;
+  }
+  if(statistics.globalStats.fastestWPM > 100) {
+    statistics.achievements.tripleDigitClub = true;
+  }
+  if(statistics.globalStats.averageAcc > 90) {
+    statistics.achievements.aPlusAccuracy = true;
+  }
+
   console.log('Should be new statistics object:', statistics)
   return(dispatch) => {
     return axios.put(`http://localhost:8080/api/users/${userId}`,{
@@ -116,7 +128,7 @@ export const updateStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsT
     })
     .then(response => {
       console.log("in updateStats: ", response.data)
-      dispatch(updateStatsSuccess(response.data))
+      dispatch(fetchStats(userId))
     })
     .catch(error => {
       throw(error);
@@ -124,10 +136,23 @@ export const updateStats = (userId, exerciseId, wordsPerMinute, accuracy, wordsT
   };
 };
 
-export const updateStatsSuccess = (stats) => {
-  console.log('Should be updated stats: ', stats)
+export const updateStatsSuccess = (statistics) => {
+  console.log('Should be updated stats: ', statistics)
   return {
     type: 'STATS_CHANGED',
-    payload: stats
+    payload: statistics
   }
+};
+
+export const fetchStats = (userId) => {
+  return(dispatch) => {
+    return axios.get(`http://localhost:8080/api/users/${userId}`)
+    .then(response => {
+      console.log("in fetchStats: ", response.data)
+      dispatch(updateStatsSuccess(response.data))
+    })
+    .catch(error => {
+      throw(error);
+    });
+  };
 };

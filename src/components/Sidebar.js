@@ -5,7 +5,7 @@
 // side of the screen
 //
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -27,6 +27,11 @@ import {
   Close,
   Help,
 } from "@material-ui/icons";
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+
+import TutorialDialog from './TutorialDialog';
 
 const drawerWidthExpanded = 240;
 const drawerWidthCondensed = 58;
@@ -71,9 +76,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default connect(mapStateToProps)(function Sidebar(props) {
   const classes = useStyles();
+  const [tutorialDialogOpen, setTutorialDialogOpen] = React.useState(false);
+
+
+
+  const handleTutorialDialogOpen = () => {
+    setTutorialDialogOpen(true);
+  };
+
+  const handleTutorialDialogClose = () => {
+    setTutorialDialogOpen(false);
+  }
 
   return (
-    <div>
+    <div className="modal">
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -98,7 +114,7 @@ export default connect(mapStateToProps)(function Sidebar(props) {
           <Link className={classes.link} to="/app/exercise">
                 <ListItem button key="Exercise">
                   <ListItemIcon>
-                    <Apps color="primary" />
+                    <PlayCircleFilledIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary="Exercise" />
                 </ListItem>
@@ -111,6 +127,29 @@ export default connect(mapStateToProps)(function Sidebar(props) {
                   <ListItemText primary="ExerciseSelection" />
                 </ListItem>
           </Link>
+          <Link className={classes.link} to="/app/stats">
+                <ListItem button key="Stats">
+                  <ListItemIcon>
+                    <EqualizerIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="Stats" />
+                </ListItem>
+          </Link>
+          <ListItem button 
+          key="Tutorial"
+          onClick={() =>
+            handleTutorialDialogOpen()
+          }
+          >
+            <ListItemIcon>
+              <HelpOutlineIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText primary="Tutorial" />
+          </ListItem>
+          <TutorialDialog
+            tutorialDialogOpen={tutorialDialogOpen}
+            handleTutorialDialogClose={handleTutorialDialogClose}
+          />
         </List>
         <Divider />
         <Divider />
