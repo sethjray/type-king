@@ -17,7 +17,7 @@ import {
     Tooltip,
   } from "@material-ui/core";
 import { exercises } from '../utils/words';
-import { setExercise, setLoading } from "../actions/index";
+import { setExerciseString, setExerciseId, setLoading } from "../actions/index";
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -98,7 +98,8 @@ export default connect(
                                         <CardActionArea
                                         dataTestId="selectExercise"
                                         onClick={() => {
-                                            props.setExercise(exercise.words)
+                                            props.setExerciseString(exercise.words)
+                                            props.setExerciseId(exercise.id)
                                         }}
                                         >
                                         {/* <CardMedia
@@ -143,7 +144,9 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
 	return bindActionCreators(
 		{
-			setLoading: setLoading, setExercise: setExercise
+			setLoading: setLoading, 
+      setExerciseString: setExerciseString,
+      setExerciseId: setExerciseId
 		},
 		dispatch
 	)

@@ -21,10 +21,6 @@ export default connect(
 	matchDispatchToProps
 )(function Exercise(props) {
 
-  useEffect(() => { //componentDidMount
-    exerciseDone = false;
-  }, []);
-
   const startingWords = props.exerciseString;
 
   const [leftPadding, setLeftPadding] = useState(
@@ -37,6 +33,41 @@ export default connect(
   const [wpm, setWpm] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
   const[typedChars, setTypedChars] = useState('');
+
+
+
+  useEffect(() => { //componentDidMount
+    exerciseDone = false;
+  }, []);
+
+
+  const updateStats = async (exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
+    props.setLoading(true);
+    try {
+      //Fetch old stats
+      var { statistics } = await axios.get(
+        `http://localhost:8080/api/users/${props.user.id}`
+      );
+
+      //Update stats here
+      statistics.globalStats.AverageAcc = (statistics.globalStats.AverageAcc + accuracy) / 2;
+
+      //Put new stats back in DB
+      const { response } = await axios.put(
+        `http://localhost:8080/api/users/${props.user.id}`,
+        {
+          statistics
+        }
+      );
+      console.log(response.data);
+      props.setLoading(false);
+    } catch (err) {
+      console.log(err.message)
+      props.setLoading(false);
+      return false
+    }
+  }
+
 
   useKeyPress(key => {
     let updatedOutgoingChars = outgoingChars;
@@ -51,9 +82,10 @@ export default connect(
       setIncomingChars("Finished!");
       setOutgoingChars("Finished!");
       //Save WPM and accuracy here for stats?
+      updateStats(props.exerciseId, wpm, accuracy, props.exerciseString.length);
+      console.log("Finished!")
       return;
     }
-    console.log(incomingChars);
 
     const updatedTypedChars = typedChars + key;
     setTypedChars(updatedTypedChars);
@@ -109,6 +141,8 @@ export default connect(
 function mapStateToProps(state) {
 	return {
     exerciseString: state.exerciseString,
+    exerciseId: state.exerciseId,
+    user: state.user
 	};
 }
 //******************************************************************************

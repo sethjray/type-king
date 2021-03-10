@@ -9,6 +9,7 @@
 // Set User Redux Function
 // File(s) Used: App.js
 export const setUser = user => {
+    console.log('set user to: ', user)
     return {
       type: 'USER_SET',
       payload: user
@@ -55,14 +56,26 @@ export const setLoading = isLoading => {
     }
   }
 
-  //******************************************************************************
+//******************************************************************************
 // Set Exercise String Redux Function
 // 
 // File(s) Used:
-export const setExercise = exerciseString => {
+export const setExerciseString = exerciseString => {
   console.log('set exercise string to: ', exerciseString)
   return {
     type: 'EXSTRING_CHANGED',
     payload: exerciseString
+  }
+}
+
+//******************************************************************************
+// Set Exercise Id Redux Function
+// 
+// File(s) Used:
+export const setExerciseId = exerciseId => {
+  console.log('set exercise id to: ', exerciseId)
+  return {
+    type: 'EXID_CHANGED',
+    payload: exerciseId
   }
 }

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  export default function LoginForm(props) {
+  export default function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [submitAttempted, setSubmitAttempted] = useState(false);

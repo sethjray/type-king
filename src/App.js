@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import './App.css'
-import { setUser, setLoading, setExercise } from './actions/index'
+import { setUser, setLoading, setExerciseString, setExerciseId } from './actions/index'
 import Login from './components/Login'
 import Home from './components/Home'
 
@@ -84,7 +84,8 @@ class App extends Component {
     }
   
     componentDidMount() {
-      this.props.setExercise(exercises[1].words)
+      this.props.setExerciseString(exercises[1].words)
+      this.props.setExerciseId(exercises[1].id)
       let token = localStorage.getItem('token')
       if (token) {
         axios
@@ -95,6 +96,7 @@ class App extends Component {
             localStorage.setItem('token', res.data)
             this.setState({ auth: true, userData: jwtDecode(res.data) })
             var temp = jwtDecode(res.data)
+            console.log("About to call setUser")
             this.props.setUser({
               id: temp.id,
               name: temp.name,
@@ -117,6 +119,7 @@ class App extends Component {
         )
         localStorage.setItem('token', data)
         this.setState({ loading: false, auth: true })
+        console.log("About to call setUser")
         this.props.setUser(jwtDecode(data))
         return true
       } catch (err) {
@@ -197,7 +200,10 @@ class App extends Component {
   // Redux Outgoing Variables Function
   function matchDispatchToProps(dispatch) {
     return bindActionCreators(
-      { setUser: setUser, setLoading: setLoading, setExercise: setExercise },
+      { setUser: setUser, 
+        setLoading: setLoading, 
+        setExerciseString: setExerciseString,
+        setExerciseId: setExerciseId },
       dispatch
     )
   }

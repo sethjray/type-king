@@ -11,14 +11,15 @@ import UserReducer from './UserReducer';
 import WindowReducer from './WindowReducer';
 import ThemeReducer from './ThemeReducer';
 import ExStringReducer from './ExStringReducer';
+import ExIdReducer from './ExIdReducer';
 
 const allReducers = combineReducers({
     loading: LoadingReducer,
     user: UserReducer,
     window: WindowReducer,
     colorTheme: ThemeReducer,
-    exerciseString: ExStringReducer
-
+    exerciseString: ExStringReducer,
+    exerciseId: ExIdReducer,
 })
 
 export default allReducers

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 const useKeyPress = callback => {
   const [keyPressed, setKeyPressed] = useState();
-  //3
   useEffect(() => {
     const downHandler = ({ key }) => {
       if (keyPressed !== key && key.length === 1) {
