@@ -134,7 +134,7 @@ export default function RegisterForm(props) {
 								fontSize: 42,
 							}}
 						>
-							Create a new Lorelines account
+							Begin your TypeKing journey!
 						</Typography>
 					</Grid>
 					{values.emailExists && (

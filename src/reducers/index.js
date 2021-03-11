@@ -13,6 +13,7 @@ import ThemeReducer from './ThemeReducer';
 import ExStringReducer from './ExStringReducer';
 import ExIdReducer from './ExIdReducer';
 import StatsReducer from './StatsReducer';
+import FriendsReducer from './FriendsReducer';
 
 const allReducers = combineReducers({
     loading: LoadingReducer,
@@ -22,6 +23,7 @@ const allReducers = combineReducers({
     exerciseString: ExStringReducer,
     exerciseId: ExIdReducer,
     statistics: StatsReducer,
+    friends: FriendsReducer,
 })
 
 export default allReducers

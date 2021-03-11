@@ -156,3 +156,39 @@ export const fetchStats = (userId) => {
     });
   };
 };
+
+export const updateFriendsSuccess = (friends) => {
+  console.log('Should be updated friends: ', friends)
+  return {
+    type: 'FRIENDS_CHANGED',
+    payload: friends
+  }
+};
+
+export const fetchFriends = (userId) => {
+  return(dispatch) => {
+    return axios.get(`http://localhost:8080/api/users/${userId}/friends`)
+    .then(response => {
+      console.log("in fetchStats: ", response.data)
+      dispatch(updateFriendsSuccess(response.data))
+    })
+    .catch(error => {
+      throw(error);
+    });
+  };
+};
+
+export const addFriend = (userId, email) => {
+  return(dispatch) => {
+    return axios.post(`http://localhost:8080/api/users/${userId}/friends`, {
+      email
+    })
+    .then(response => {
+      console.log("in addFriend: ", response.data)
+      dispatch(fetchFriends(userId))
+    })
+    .catch(error => {
+      throw(error);
+    }); 
+  }
+}

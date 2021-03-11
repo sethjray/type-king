@@ -16,6 +16,7 @@ import Sidebar from "./Sidebar";
 import Exercise from "./Exercise";
 import ExerciseSelection from "./ExerciseSelection";
 import Stats from "./Stats";
+import Friends from "./Friends";
 
 const styleClasses = () => ({
   root: {
@@ -98,6 +99,9 @@ class Home extends Component {
 						</Route>
 						<Route path="/app/stats">
 							<Stats />
+						</Route>
+						<Route path="/app/friends">
+							<Friends />
 						</Route>
 					</div>
 				</div>

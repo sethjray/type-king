@@ -30,6 +30,7 @@ import {
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 
 import TutorialDialog from './TutorialDialog';
 
@@ -133,6 +134,14 @@ export default connect(mapStateToProps)(function Sidebar(props) {
                     <EqualizerIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary="Stats" />
+                </ListItem>
+          </Link>
+          <Link className={classes.link} to="/app/friends">
+                <ListItem button key="Friends">
+                  <ListItemIcon>
+                    <PeopleOutlineIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="Friends" />
                 </ListItem>
           </Link>
           <ListItem button 
