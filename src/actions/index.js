@@ -19,7 +19,7 @@ export const setUser = user => {
 
   //******************************************************************************
 // Set Loading Redux Function
-// File(s) Used: App.js, Lorelines.js, Home.js, Directory.js
+// File(s) Used: App.js, Home.js, Directory.js
 export const setLoading = isLoading => {
     return {
       type: 'SET_LOADING',

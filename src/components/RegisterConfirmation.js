@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { makeStyles, Grid, Typography } from '@material-ui/core'
 //******************************************************************************
 // RegisterConfirmation.js
-// Holds the RegisterConfirmation function that displays a message upon 
-// successfully creating a Lorelines account
 //
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +27,7 @@ export default function RegisterForm() {
         container
       >
         <Grid item>
-          <Typography>Thank you for creating a Lorelines account</Typography>
+          <Typography>Thank you for creating a TypeKing account</Typography>
         </Grid>
         <Grid item>
           <Typography>

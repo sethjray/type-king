@@ -1,8 +1,7 @@
 /** @format */
 //******************************************************************************
-// src/loreline_interaction/DeleteLorelineDialog.js
+// src/TutorialDialog.js
 // Contains the function that creats a popup when a user attempts
-// to delete a loreline
 //
 import React from "react";
 import {
@@ -35,7 +34,7 @@ export default function TutorialDialog(props) {
       open={props.tutorialDialogOpen}
       onClose={props.handleTutorialDialogClose}
     >
-      <DialogTitle>Welcome to the tutorial!!!</DialogTitle>
+      <DialogTitle>Welcome to TypeKing</DialogTitle>
       <DialogContent>
         <DialogContentText
           style={{
@@ -43,9 +42,13 @@ export default function TutorialDialog(props) {
             color: "#ea4b35",
           }}
         >
-          First place your pointer fingers on the f and j keys. Your remaining
+          This is a quick start tutorial to help you learn good typing practices!
+          First place your pointer fingers on the f and j keys, you should feel little bumps. 
+          This is so you can always find them without looking. Your remaining
           fingers (except your thumb) should each be on a key of the same row,
-          with left pinky on 'a' and right pinky on ';'. Then click an exercise to get started!
+          with left pinky on 'a' and right pinky on ';'. These are your home keys, 
+          and is where we'll start with the first exercise. 
+          Please click on the first exercise and then play to get started to get started!
         </DialogContentText>
       </DialogContent>
     </Dialog>

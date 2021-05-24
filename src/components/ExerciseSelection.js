@@ -74,12 +74,13 @@ export default connect(
         <main className={classes.root}>
             <div style={{ marginTop: 20 }}>
                 <Typography style={{ marginLeft: 20, marginBottom: 20 }} variant="h4">
-                Select a Exercise
+                Select a Exercise, then click the play button in the top left!
                 </Typography>
                 <Divider />
                 <div className={classes.root}>
                     <Grid
                         container
+                        spacing = {2}
                         style={{ marginTop: 15 }}
                         direction="row"
                         justify="space-around"
@@ -87,13 +88,7 @@ export default connect(
                     >
                         {exercises.map((exercise) => (
                             <Grid item key={exercises.indexOf(exercise)}>
-                                <Card
-                                // className={
-                                //     props.loreline === loreline._id
-                                //     ? classes.selectedCard
-                                //     : classes.card
-                                // }
-                                >
+                                <Card>
                                     <Tooltip title="Select this exercise">
                                         <CardActionArea
                                         dataTestId="selectExercise"
@@ -102,13 +97,6 @@ export default connect(
                                             props.setExerciseId(exercise.id)
                                         }}
                                         >
-                                        {/* <CardMedia
-                                            className={classes.cardimage}
-                                            image={
-                                            loreline.image ??
-                                            "https://lorelines-image-library.s3-us-west-2.amazonaws.com/default_loreline_image.png"
-                                            }
-                                        /> */}
                                         <CardHeader
                                             title={
                                             <Typography

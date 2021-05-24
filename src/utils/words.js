@@ -21,8 +21,8 @@ export const exercises = [
   { name: "Lower Row", id: 4, words: "This is the fourth exercise, the end." },
   { name: "Numbers", id: 5, words: "This is the fifth exercise, the end." },
   { name: "Extensive Punctuation", id: 6, words: "This is the sixth exercise, the end." },
-  { name: "Exercise 7", id: 7, words: "This is the seventh exercise, the end." },
-  { name: "Exercise 8", id: 8, words: "This is the eighth exercise, the end." },
-  { name: "Exercise 9", id: 9, words: "This is the ninth exercise, the end." },
-  { name: "Exercise 10", id: 10, words: "This is the tenth exercise, the end." }
+  { name: "Endurance Training", id: 7, words: "This is the seventh exercise, the end." },
+  { name: "Common Coding Words", id: 8, words: "This is the eighth exercise, the end." },
+  { name: "Dictionary Training", id: 9, words: "This is the ninth exercise, the end." },
+  { name: "Lots of Latin", id: 10, words: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." }
 ];
