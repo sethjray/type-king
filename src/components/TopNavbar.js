@@ -1,7 +1,7 @@
 /** @format */
 //******************************************************************************
-// Topbar.js
-// Holds the Topbar function that displays the bar at the top of the website
+// TopNavbar.js
+// Holds the TopNavbar function that displays the bar at the top of the website
 // Contains the logout button
 //
 import clsx from "clsx";
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Topbar(props) {
+export default function TopNavbar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const widthAboveMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -129,9 +129,6 @@ export default function Topbar(props) {
             viewBox="0 0 41.17 41.17"
           >
             <g id="Layer_2" data-name="Layer 2">
-              <g id="Layer_1-2" data-name="Layer 1">
-                <circle className="cls-1" cx="20.58" cy="20.58" r="20.58" />
-              </g>
             </g>
           </svg>
           <svg

@@ -11,8 +11,8 @@ import { bindActionCreators } from "redux";
 
 import { setWindowWidth, setWindowHeight, setLoading } from "../actions/index";
 
-import Topbar from "./Topbar";
-import Sidebar from "./Sidebar";
+import TopNavbar from "./TopNavbar";
+import Navbar from "./Navbar";
 import Exercise from "./Exercise";
 import ExerciseSelection from "./ExerciseSelection";
 import Stats from "./Stats";
@@ -40,7 +40,6 @@ const styleClasses = () => ({
 
 const drawerOpenWidth = 240;
 const drawerClosedWidth = 58;
-const topBarHeight = 64;
 
 class Home extends Component {
 	constructor(props) {
@@ -74,13 +73,13 @@ class Home extends Component {
 		return (
 			<div>
 				{!this.props.auth && <Redirect to="/" />}
-				<Topbar
+				<TopNavbar
 					logout={this.props.logout}
 					drawerOpen={this.state.drawerOpen}
 					setDrawerOpen={this.toggleDrawer}
 				/>
 				<div className={styleClasses.root}>
-					<Sidebar drawerOpen={this.state.drawerOpen} setDrawerOpen={this.toggleDrawer} />
+					<Navbar drawerOpen={this.state.drawerOpen} setDrawerOpen={this.toggleDrawer} />
 					<div
 						width={this.props.window.width}
 						height={this.props.window.height}

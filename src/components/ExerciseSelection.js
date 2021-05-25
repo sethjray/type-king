@@ -3,7 +3,6 @@
 // ExerciseSelection.js
 // Main page that lets you select multiple exercises
 //
-import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {

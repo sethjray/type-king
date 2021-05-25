@@ -22,13 +22,11 @@ import RegisterForm from './components/RegisterForm'
 
 import { exercises } from './utils/words';
 
-const jwtDecode = require('jwt-decode')
-
 // color theme definition: light
 const light = createMuiTheme({
     palette: {
       primary: {
-        main: '#ff0004',
+        main: '#c19a23',
         contrastText: '#fff'
       },
       drawer: {
@@ -37,7 +35,7 @@ const light = createMuiTheme({
         icons: '#000'
       },
       secondary: { main: '#000' },
-      error: { main: '#ff0000' }
+      error: { main: '#c19a23' }
     }
   })
   
@@ -45,7 +43,7 @@ const light = createMuiTheme({
   const dark = createMuiTheme({
     palette: {
       primary: {
-        main: '#ff0004',
+        main: '#c19a23',
         contrastText: '#fff'
       },
       drawer: {
@@ -54,7 +52,7 @@ const light = createMuiTheme({
         icons: '#fff'
       },
       secondary: { main: '#fff' },
-      error: { main: '#ff0000' },
+      error: { main: '#c19a23' },
       type: 'dark'
     }
   })

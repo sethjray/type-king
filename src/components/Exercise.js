@@ -1,13 +1,11 @@
 /** @format */
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { prepareStats, setLoading } from '../actions/index'
 
 import logo from '../logo.svg';
 import './App.css';
-import { generate, exerciseOne } from '../utils/words';
 import useKeyPress from '../hooks/useKeyPress';
 import { currentTime } from '../utils/time';
 
@@ -41,49 +39,6 @@ export default connect(
   }, []);
 
 
-  const getOldStats = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/users/${props.user._id}`
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      return null;
-    }
-  }
-
-
-  // const updateStatsVer1 = async (exerciseId, wordsPerMinute, accuracy, wordsTyped) => {
-  //   props.setLoading(true);
-  //   try {
-  //     //Fetch old stats
-  //     const statistics = await axios.get(
-  //       `http://localhost:8080/api/users/${props.user._id}`
-  //     )
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-
-  //     //Update stats here
-  //     statistics.data.globalStats.averageAcc = (statistics.data.globalStats.averageAcc + accuracy) / 2;
-
-  //     //Put new stats back in DB
-  //     const { response2 } = await axios.put(
-  //       `http://localhost:8080/api/users/${props.user._id}`,
-  //       {
-  //         statistics
-  //       }
-  //     );
-  //     props.setLoading(false);
-  //   } catch (err) {
-  //     console.log(err.message)
-  //     props.setLoading(false);
-  //     return false
-  //   }
-  // }
-
-
   useKeyPress(key => {
     let updatedOutgoingChars = outgoingChars;
     let updatedIncomingChars = incomingChars;
@@ -92,11 +47,11 @@ export default connect(
       setStartTime(currentTime());
     }
 
-    //Put exercise end logic here?
+    //Put exercise end logic here
     if(exerciseDone === true) {
       setIncomingChars("Finished!");
       setOutgoingChars("Finished!");
-      //Save WPM and accuracy here for stats?
+      //Save WPM and accuracy here for stats
       props.prepareStats(props.user._id, props.exerciseId, wpm, accuracy, props.exerciseString.length);
       console.log("Finished!")
       //return;
@@ -123,10 +78,7 @@ export default connect(
         setCurrentChar(incomingChars.charAt(0));
 
         updatedIncomingChars = incomingChars.substring(1);
-      //   if(updatedIncomingChars.split(' ').length < 10) {
-      //     updatedIncomingChars += ' ' + generate();
-      //   }
-        if(currentChar == '.') {
+        if(currentChar === '.') {
           exerciseDone = true;
         }
       
@@ -144,12 +96,12 @@ export default connect(
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p className="Character">
-          <span className="Character-out">{(leftPadding + outgoingChars).slice(-20)}</span>
+          <span className="Character-out">{(leftPadding + outgoingChars).slice(-40)}</span>
           <span className="Character-current">{currentChar}</span>
-          <span>{incomingChars.substr(0, 20)}</span>
+          <span>{incomingChars.substr(0, 40)}</span>
         </p>
         <h3>
-          WPM: {wpm} | ACC: {accuracy}%
+          Words per Minute: {wpm} | Accuracy: {accuracy}%
         </h3>
       </header>
     </div>

@@ -5,10 +5,10 @@
 //
 //
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setTheme, fetchFriends, addFriend } from '../actions/index'
+import { fetchFriends, addFriend } from '../actions/index'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';

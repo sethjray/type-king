@@ -5,11 +5,11 @@
 //
 //
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { makeStyles, Grid, Typography, Button } from '@material-ui/core'
+import { makeStyles, Grid, Typography } from '@material-ui/core'
 import { bindActionCreators } from 'redux'
-import { setTheme, fetchStats } from '../actions/index'
+import { fetchStats } from '../actions/index'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -83,13 +83,6 @@ export default connect(
                     <Typography gutterBottom>
 						Best Friends Forever!: false
 					</Typography>
-					{/* <Typography gutterBottom>Website Theme</Typography>
-					<Button onClick={handleDark} variant="contained" color="default" dataTestId="darkModeButton">
-						Dark
-					</Button>
-					<Button onClick={handleLight} variant="contained" color="default" dataTestId="lightModeButton">
-						Light
-					</Button> */}
 				</Grid>
 			</Grid>
 		</main>

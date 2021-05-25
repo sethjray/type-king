@@ -8,11 +8,11 @@
   }
   
   .Character-current {
-    background-color: #0967d3;
+    background-color: #c19a23;
   }
   
   .Character-out {
-    color: silver;
+    color: #39033a;
   }
   
   .App-logo {
@@ -27,7 +27,7 @@
   }
   
   .App-header {
-    background-color: #282c34;
+    background-color: #303030;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

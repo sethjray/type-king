@@ -1,11 +1,11 @@
 /** @format */
 //******************************************************************************
-// Sidebar.js
-// Holds the Sidebar function that controls the pullout sidebar on the left
+// Navbar.js
+// Holds the Navbar function that controls the pullout Navbar on the left
 // side of the screen
 //
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -19,13 +19,8 @@ import {
   IconButton,
 } from "@material-ui/core";
 import {
-  AccountCircle,
   Apps,
-  Timeline,
-  List as ListIcon,
-  Info,
   Close,
-  Help,
 } from "@material-ui/icons";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -57,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: drawerWidthCondensed, //theme.spacing(7) + 1,
+    width: drawerWidthCondensed,
     [theme.breakpoints.up("sm")]: {
-      width: drawerWidthCondensed, //theme.spacing(9) + 1,
+      width: drawerWidthCondensed,
     },
   },
   toolbar: {
@@ -75,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default connect(mapStateToProps)(function Sidebar(props) {
+export default connect(mapStateToProps)(function Navbar(props) {
   const classes = useStyles();
   const [tutorialDialogOpen, setTutorialDialogOpen] = React.useState(false);
 

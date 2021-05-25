@@ -10,7 +10,6 @@ import {
   makeStyles,
   Grid,
   IconButton,
-  Input,
 } from "@material-ui/core";
 
 import { Mail, Lock, Visibility, VisibilityOff } from "@material-ui/icons";
@@ -104,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
                 name="email"
                 label="Email"
                 type="email"
-                variant="outlined"
+                variant="filled"
                 margin="normal"
                 autoComplete="off"
                 InputProps={{
@@ -132,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
                 }
                 name="password"
                 label="Password"
-                variant="outlined"
+                variant="filled"
                 margin="normal"
                 type={showPassword ? "text" : "password"}
                 autoComplete="off"
@@ -193,9 +192,9 @@ const useStyles = makeStyles((theme) => ({
             </Grid>
             <Grid item>
               <Typography style={{ padding: 30, fontSize: 20 }}>
-                Would you like to make an account?{" "}
+                {" "}
                 <Link className={classes.link} to="/register">
-                  Click here
+                  Register
                 </Link>
               </Typography>
             </Grid>
